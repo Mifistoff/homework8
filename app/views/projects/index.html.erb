@@ -1,0 +1,42 @@
+<h1>Projects</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @projects.each do |project| %>
+      <tr>
+        <td><%= project.name %></td>
+        <td><%= link_to 'Show', project %></td>
+        <td><%= link_to 'Edit', edit_project_path(project) %></td>
+        <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<% new_project_link = link_to('New Project', new_project_path) %>
+
+<% if current_user.plan == 'free' && current_user.projects.count < 3 %>
+  <%= new_project_link %>
+
+<% elsif current_user.plan == 'business' && current_user.projects.count < 10 %>
+  <%= new_project_link %>
+
+<% elsif current_user.plan == 'premium' && current_user.projects.count < 100 %>
+  <%= new_project_link %>
+
+<% elsif current_user.plan == 'custom' %>
+  <%= new_project_link %>
+
+<% else %>
+  <%= "Your #{current_user.plan} plan is over limited. Please increase it for creating more projects" %>
+
+<% end %>
