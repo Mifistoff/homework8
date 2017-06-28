@@ -4,6 +4,12 @@
 3. `rails db:setup`
 4. `rspec` or use `guard`
 
+# Read
+
+1. SOLID
+2. DRY
+3. KISS
+
 # Tasks
 1. Remove all business logic from controller and resolve all TODO's
 2. Refactor `ProjectsController#create` to ServiceObject + specs
