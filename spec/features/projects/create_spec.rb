@@ -18,7 +18,7 @@ RSpec.describe 'Projects#create' do
 
   context 'over free plan' do
     before do
-      3.times { user.projects << create(:project, user: user) }
+      user.projects << create_list(:project, 3, user: user)
     end
 
     it 'shows plan over limit message' do
@@ -34,7 +34,7 @@ RSpec.describe 'Projects#create' do
     before do
       user.business!
       user.reload
-      10.times { user.projects << create(:project, user: user) }
+      user.projects << create_list(:project, 10, user: user)
     end
 
     it 'shows plan over limit message' do
@@ -50,7 +50,7 @@ RSpec.describe 'Projects#create' do
     before do
       user.premium!
       user.reload
-      100.times { user.projects << create(:project, user: user) }
+      user.projects << create_list(:project, 100, user: user)
     end
 
     it 'shows plan over limit message' do
@@ -66,7 +66,7 @@ RSpec.describe 'Projects#create' do
     before do
       user.custom!
       user.reload
-      101.times { user.projects << create(:project, user: user) }
+      user.projects << create_list(:project, 101, user: user)
     end
 
     it 'shows plan over limit message' do
