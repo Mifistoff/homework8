@@ -18,5 +18,6 @@ class Project
       else
         false
       end
+    end
   end
 end
