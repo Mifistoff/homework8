@@ -3,8 +3,7 @@ class ProjectsController < ApplicationController
 
   def index
     # TODO: Refactor to query
-    relation = Project.all
-    @projects = Project::AllForUser.new.call(relation, current_user)
+    @projects = Project::AllForUser.new.call(Project.all, current_user)
   end
 
   def show
