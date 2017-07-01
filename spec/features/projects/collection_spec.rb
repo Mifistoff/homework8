@@ -17,8 +17,10 @@ RSpec.describe 'Projects#collection' do
       visit '/projects'
     end
 
-    it { expect(page).to_not have_link 'New Project' }
-    it { expect(page).to have_content 'Your free plan is over limited. Please increase it for creating more projects' }
+    it do
+      expect(page).to_not have_link 'New Project'
+      expect(page).to have_content 'Your free plan is over limited. Please increase it for creating more projects'
+    end
   end
 
   context 'over business plan' do
@@ -29,8 +31,10 @@ RSpec.describe 'Projects#collection' do
       visit '/projects'
     end
 
-    it { expect(page).to_not have_link 'New Project' }
-    it { expect(page).to have_content 'Your business plan is over limited. Please increase it for creating more projects' }
+    it do
+      expect(page).to_not have_link 'New Project'
+      expect(page).to have_content 'Your business plan is over limited. Please increase it for creating more projects'
+    end
   end
 
   context 'over premium plan' do
@@ -41,8 +45,10 @@ RSpec.describe 'Projects#collection' do
       visit '/projects'
     end
 
-    it { expect(page).to_not have_link 'New Project' }
-    it { expect(page).to have_content 'Your premium plan is over limited. Please increase it for creating more projects' }
+    it do
+      expect(page).to_not have_link 'New Project'
+      expect(page).to have_content 'Your premium plan is over limited. Please increase it for creating more projects'
+    end
   end
 
   context 'custom plan' do
