@@ -33,7 +33,7 @@ group :test do
   gem 'shoulda-matchers'
   gem 'faker'
   gem 'launchy'
-  gem 'simplecov'
+  gem 'rspec-virtus'
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
