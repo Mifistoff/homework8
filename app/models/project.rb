@@ -8,7 +8,6 @@ class Project < ApplicationRecord
   before_save :check_plan
 
   def check_plan
-    return if user.plan == 'custom'
     return if user.plan == 'free'     && user.projects.count < 3
     return if user.plan == 'business' && user.projects.count < 10
     return if user.plan == 'premium'  && user.projects.count < 100
