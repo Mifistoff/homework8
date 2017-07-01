@@ -28,7 +28,9 @@ class ProjectsController < ApplicationController
     end
 
   rescue ProjectLimitError
-    redirect_to projects_path, alert: "Your #{current_user.plan} plan is over limited. Please increase it for creating more projects"
+    redirect_to projects_path,
+    alert: "Your #{current_user.plan} plan is over limited.
+    Please increase it for creating more projects"
   end
 
   def update
