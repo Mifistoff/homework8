@@ -1,6 +1,6 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :edit, :update, :destroy]
-
+  ProjectLimitError = Class.new(StandardError)
   def index
     # TODO: Refactor to query
     @projects = Project::AllForUser.new.call(Project.all, current_user)
@@ -17,21 +17,18 @@ class ProjectsController < ApplicationController
 
   def create
     # TODO: Refactor to form & policy
-    @project = current_user.projects.new(project_params)
+    raise ProjectLimitError unless policy.allowed?
 
-    save_project = -> {
-      if @project.save
-        redirect_to @project, notice: 'Project was successfully created.'
-      else
-        render :new
-      end
-    }
+    @project = Project::Create.new(project_params, current_user).call
 
-    if policy.allowed?
-      save_project.call
+    if @project.save
+      redirect_to @project, notice: 'Project was successfully created.'
     else
-      redirect_to projects_path, alert: "Your #{current_user.plan} plan is over limited. Please increase it for creating more projects"
+      render :new
     end
+
+  rescue ProjectLimitError
+    redirect_to projects_path, alert: "Your #{current_user.plan} plan is over limited. Please increase it for creating more projects"
   end
 
   def update
