@@ -7,7 +7,7 @@ class Project
     end
 
     def call
-      Project.new(project_attributes)
+      Project.create(project_attributes)
     end
 
     private

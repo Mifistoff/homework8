@@ -21,8 +21,9 @@ class ProjectsController < ApplicationController
 
     @project = Project::Create.new(project_params, current_user).call
 
-    if @project.save
-      redirect_to @project, notice: 'Project was successfully created.'
+    if @project.id
+      redirect_to @project,
+      notice: 'Project was successfully created.'
     else
       render :new
     end
