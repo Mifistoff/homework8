@@ -13,7 +13,7 @@ RSpec.describe 'Projects#collection' do
 
   context 'over free plan' do
     before do
-      user.projects << create_list(:project, 3, user: user)
+      allow(user).to receive_message_chain(:projects, :count) { 3 }
       visit '/projects'
     end
 
@@ -26,7 +26,7 @@ RSpec.describe 'Projects#collection' do
   context 'over business plan' do
     before do
       user.business!
-      user.projects << create_list(:project, 10, user: user)
+      allow(user).to receive_message_chain(:projects, :count) { 10 }
       visit '/projects'
     end
 
@@ -39,7 +39,7 @@ RSpec.describe 'Projects#collection' do
   context 'over premium plan' do
     before do
       user.premium!
-      user.projects << create_list(:project, 100, user: user)
+      allow(user).to receive_message_chain(:projects, :count) { 100 }
       visit '/projects'
     end
 
@@ -52,7 +52,7 @@ RSpec.describe 'Projects#collection' do
   context 'custom plan' do
     before do
       user.custom!
-      user.projects << create_list(:project, 101, user: user)
+      allow(user).to receive_message_chain(:projects, :count) { 101 }
       visit '/projects'
     end
 
