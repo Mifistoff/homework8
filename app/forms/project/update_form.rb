@@ -11,7 +11,12 @@ class Project
     validates :name, presence: true
 
     def persist
-
-    end
+      @record = id ? User.find(id) : User.new
+      if @record.valid?
+        @record.update!
+        true
+      else
+        false
+      end
   end
 end
