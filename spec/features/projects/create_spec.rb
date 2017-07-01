@@ -33,7 +33,6 @@ RSpec.describe 'Projects#create' do
   context 'over business plan' do
     before do
       user.business!
-      user.reload
       user.projects << create_list(:project, 10, user: user)
     end
 
@@ -49,7 +48,6 @@ RSpec.describe 'Projects#create' do
   context 'over premium plan' do
     before do
       user.premium!
-      user.reload
       user.projects << create_list(:project, 100, user: user)
     end
 
@@ -65,7 +63,6 @@ RSpec.describe 'Projects#create' do
   context 'custom plan' do
     before do
       user.custom!
-      user.reload
       user.projects << create_list(:project, 101, user: user)
     end
 
