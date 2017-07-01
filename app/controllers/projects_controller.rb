@@ -27,18 +27,8 @@ class ProjectsController < ApplicationController
       end
     }
 
-    if current_user.plan == 'free' && current_user.projects.count < 3
+    if policy.allowed?
       save_project.call
-
-    elsif current_user.plan == 'business' && current_user.projects.count < 10
-      save_project.call
-
-    elsif current_user.plan == 'premium' && current_user.projects.count < 100
-      save_project.call
-
-    elsif current_user.plan == 'custom'
-      save_project.call
-
     else
       redirect_to projects_path, alert: "Your #{current_user.plan} plan is over limited. Please increase it for creating more projects"
     end
@@ -66,5 +56,9 @@ class ProjectsController < ApplicationController
 
   def project_params
     params.require(:project).permit(:name, :user_id)
+  end
+
+  def policy
+    Project::CreatePolicy.new(current_user)
   end
 end
