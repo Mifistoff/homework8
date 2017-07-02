@@ -5,12 +5,7 @@ class Project
     end
 
     def call
-      if @project.tasks.blank?
-        @project.destroy
-        true
-      else
-        false
-      end
+      @project.destroy if @project.tasks.blank?
     end
   end
 end
