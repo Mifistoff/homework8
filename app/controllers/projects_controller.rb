@@ -1,6 +1,7 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :edit, :update, :destroy]
   ProjectLimitError = Class.new(StandardError)
+  
   def index
     # TODO: Refactor to query
     @projects = Project::AllForUser.new.call(Project.all, current_user)
