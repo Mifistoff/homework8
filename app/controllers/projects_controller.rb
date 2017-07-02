@@ -44,8 +44,13 @@ class ProjectsController < ApplicationController
   end
 
   def destroy
-    @project.destroy
-    redirect_to projects_url, notice: 'Project was successfully destroyed.'
+    if @project.tasks.blank?
+      @project.destroy
+      redirect_to projects_url, notice: 'Project was successfully destroyed.'
+    else
+      redirect_to projects_url,
+      alert: "The project: '#{@project.name}' has tasks"
+    end
   end
 
   private
