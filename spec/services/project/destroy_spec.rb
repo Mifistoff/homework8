@@ -13,9 +13,8 @@ RSpec.describe Project::Destroy do
   end
 
   context 'with tasks' do
-    before do
-      project.tasks << create(:task, project: project)
-    end
+    before { project.tasks << create(:task, project: project) }
+    
     it { expect(failure_result).to be_falsey }
   end
 end
