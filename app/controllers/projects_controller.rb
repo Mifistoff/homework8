@@ -44,8 +44,7 @@ class ProjectsController < ApplicationController
   end
 
   def destroy
-    if @project.tasks.blank?
-      @project.destroy
+    if Project::Destroy.new(@project).call
       redirect_to projects_url, notice: 'Project was successfully destroyed.'
     else
       redirect_to projects_url,
