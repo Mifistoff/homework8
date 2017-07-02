@@ -23,22 +23,20 @@ class ProjectsController < ApplicationController
     @project = Project::Create.new(project_params, current_user).call
 
     if @project.id
-      redirect_to @project,
-      notice: 'Project was successfully created.'
+      redirect_to @project, notice: I18n.t(:project_created)
     else
       render :new
     end
 
   rescue ProjectLimitError
-    redirect_to projects_path,
-    alert: "Your #{current_user.plan} plan is over limited.
-    Please increase it for creating more projects"
+    redirect_to projects_url,
+    alert: I18n.t(:plan_over_limited, plan: current_user.plan)
   end
 
   def update
     # TODO: Refactor to form
     if @project.update(project_params)
-      redirect_to @project, notice: 'Project was successfully updated.'
+      redirect_to @project, notice: I18n.t(:project_updated)
     else
       render :edit
     end
@@ -46,10 +44,10 @@ class ProjectsController < ApplicationController
 
   def destroy
     if Project::Destroy.new(@project).call
-      redirect_to projects_url, notice: 'Project was successfully destroyed.'
+      redirect_to projects_url, notice: I18n.t(:project_destroyed)
     else
       redirect_to projects_url,
-      alert: "The project: '#{@project.name}' has tasks"
+      alert: I18n.t(:project_not_destroyed, name: @project.name)
     end
   end
 

@@ -31,3 +31,8 @@
 
 en:
   hello: "Hello world"
+  project_created: "Project was successfully created."
+  project_updated: "Project was successfully updated."
+  project_destroyed: "Project was successfully destroyed."
+  project_not_destroyed: "The project: '%{name}' has tasks."
+  plan_over_limited: "Your %{plan} plan is over limited. Please increase it for creating more projects."
