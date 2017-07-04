@@ -33,7 +33,9 @@ class ProjectsController < ApplicationController
 
   def update
     # TODO: Refactor to form
-    if @project.update(project_params)
+    form = Project::UpdateForm.new(project_params)
+    if form.validate?
+      @project.update(project_params)
       redirect_to @project, notice: I18n.t(:project_updated)
     else
       render :edit

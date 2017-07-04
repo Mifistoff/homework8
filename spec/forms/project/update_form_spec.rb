@@ -20,4 +20,10 @@ RSpec.describe Project::UpdateForm, type: :model do
       is_expected.not_to validate_presence_of(:user_id)
     end
   end
+
+  describe '#validate?' do
+    it 'not validate if no name' do
+      expect(described_class.new(name: '').validate?).to eq(false)
+    end
+  end
 end
