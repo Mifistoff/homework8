@@ -10,10 +10,10 @@ RSpec.describe Project::Create do
   let(:failure_result) { Project::Create.new(invalid_params, user).call }
 
   context 'valid_params' do
-    it { expect(success_result.id).to be_truthy }
+    it { expect(success_result).to be_truthy }
   end
 
   context 'invalid_params' do
-    it { expect(failure_result.id).to be_falsey }
+    it { expect(failure_result).to be_falsey }
   end
 end
