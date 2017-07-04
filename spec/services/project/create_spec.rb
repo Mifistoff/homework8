@@ -14,6 +14,6 @@ RSpec.describe Project::Create do
   end
 
   context 'invalid_params' do
-    it { expect(failure_result).to be_falsey }
+    it { expect(failure_result.id).to be_falsey }
   end
 end

@@ -19,9 +19,9 @@ class ProjectsController < ApplicationController
   def create
     # TODO: Refactor to form & policy
     raise ProjectLimitError unless policy.allowed?
-
-    if Project::Create.new(project_params, current_user).call
-      redirect_to current_user.projects.last, notice: I18n.t(:project_created)
+    @project = Project::Create.new(project_params, current_user).call
+    if @project.save
+      redirect_to @project, notice: I18n.t(:project_created)
     else
       render :new
     end

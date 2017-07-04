@@ -7,12 +7,7 @@ class Project
     end
 
     def call
-      if project_attributes[:name].empty?
-        @project = Project.create(project_attributes)
-        @project.user_id = nil
-      else
-        Project.create(project_attributes)
-      end
+      Project.new(project_attributes)
     end
 
     private
